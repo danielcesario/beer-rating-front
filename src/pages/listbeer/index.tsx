@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BeerCard } from '../../components/BeerCard';
-import { NavButton } from '../../components/NavButton';
+import { PaginationBar } from '../../components/PaginationBar';
 import { BeerPage } from '../../model/BeerPage';
 import { listBeers } from '../../service/BeerService';
 import { PageContainer } from '../stiles';
@@ -20,12 +20,9 @@ const ListBeer: React.FC = () => {
     fetchBeers();
   }, [currentPage]);
 
-  const back = () => {
-    setCurrentPage(currentPage - 1);
-  }
-
-  const next = () => {
-    setCurrentPage(currentPage + 1);
+  const changeCurrentPage = (change: number) => {
+    setIsLoad(true);
+    setCurrentPage(change);    
   }
 
   return (
@@ -33,15 +30,11 @@ const ListBeer: React.FC = () => {
       {isLoad ? (
         <div className="loading">Loading</div>
       ) : (
-          page?._embedded?.beers.map(beer => {
-            return <BeerCard beer={beer} />
-          })
+          <>
+            {page?._embedded?.beers.map(beer => <BeerCard beer={beer} />)}
+            <PaginationBar pageSummary={page?.page} changeCurrentPage={(cp: number) => changeCurrentPage(cp)} />
+          </>
         )}
-
-      <div>
-        <NavButton func={back}>Back</NavButton>
-        <NavButton func={next}>Next</NavButton>
-      </div>
 
     </PageContainer>)
 }

@@ -9,6 +9,7 @@ export const BeerCardContainer = styled.div`
   border: 1px solid lightGray;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
 
   .header, .body, .footer {
     display: flex;

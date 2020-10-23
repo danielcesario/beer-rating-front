@@ -1,9 +1,9 @@
 import React from 'react';
-import { ButtonNavContainer } from './style';
+import { NavButtonContainer } from './style';
 
-export const NavButton: React.FC<{ func: any }> = ({ func, children }) => {
+export const NavButton: React.FC<{ action: any, disabled: boolean }> = ({ action, disabled, children }) => {
     return(
-    <ButtonNavContainer>
-        <button className="button" onClick={func}>{children}</button>
-    </ButtonNavContainer>);
+    <NavButtonContainer>
+        <button disabled={disabled} className="button" onClick={action}>{children}</button>
+    </NavButtonContainer>);
 }
