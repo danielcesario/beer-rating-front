@@ -1,14 +1,14 @@
 import { LinkItem } from "./Links";
 
 export interface Beer {
-    id: number;
+    id: number | null;
     name: string;
     type: string;
     imageUrl: string;
     alcoholVolume: string;
     description: string;
     country: string;
-    _links: BeerLink;
+    _links?: BeerLink;
 }
 
 export interface BeerLink {
