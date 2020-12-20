@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
+import { saveBeer } from '../../service/BeerService';
 
+//https://react-hook-form.com/get-started#TypeScript
 const CreateBeer: React.FC = () => {
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState({})
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let propertyName: string = event.target.name;
-    let propertyValue: string = event.target.value;
-
-    let obj: any = {}
-    obj[propertyName] = propertyValue;
-    
-    setData({...data, ...obj})
+    let result:any = {};
+    result[event.target.name] = event.target.value;
+    setData({...data, ...result});
   }
-
+  
   const onSubmit = () => {
-    console.log(data);
+    saveBeer(data).then(resp => {
+      alert('OK');
+    }).catch(error => {
+      console.error(error);
+    });
   }
-
+  
   return (
     <div>
       <div>

@@ -1,7 +1,8 @@
 import axios from 'axios';
 
+let baseUrl = 'http://localhost:8080/api/beers'
+
 export const listBeers = async (page) => {
-    let baseUrl = 'http://localhost:8080/api/beers'
     if (page && page > 0) {
         baseUrl = baseUrl + '?page=' + page;
     }
@@ -14,4 +15,8 @@ export const listBeers = async (page) => {
             return null;
         });
     return result;
+}
+
+export const saveBeer = async (beer) => {
+    return axios.post('http://localhost:8080/api/beers', beer);
 }
