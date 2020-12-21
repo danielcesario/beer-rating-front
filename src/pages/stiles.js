@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
 export const PageContainer = styled.div`
+
+`;
+
+export const Row = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-top: 8px;
-  width: 1336px;
+  width: 100%;
 `;
 
 export const Navbar = styled.nav`

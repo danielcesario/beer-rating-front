@@ -3,7 +3,7 @@ import { BeerCard } from '../../components/BeerCard';
 import { PaginationBar } from '../../components/PaginationBar';
 import { BeerPage } from '../../model/BeerPage';
 import { listBeers } from '../../service/BeerService';
-import { PageContainer } from '../stiles';
+import { PageContainer, Row } from '../stiles';
 
 const ListBeer: React.FC = () => {
 
@@ -12,29 +12,41 @@ const ListBeer: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    const fetchBeers = async () => {
-      const result = await listBeers(currentPage);
-      setPage(result);
-      setIsLoad(false);
-    }
-    fetchBeers();
+    load();
+  }, []);
+
+  useEffect(() => {
+    load(currentPage);
   }, [currentPage]);
+
+  const load = async (currentPage?: number) => {
+    const result = await listBeers(currentPage||null);
+    await setPage(result);
+    await setIsLoad(false);
+  }
 
   const changeCurrentPage = (change: number) => {
     setIsLoad(true);
-    setCurrentPage(change);    
+    setCurrentPage(change);
   }
 
   return (
     <PageContainer>
       {isLoad ? (
-        <div className="loading">Loading</div>
+        <div className="loading" data-testid="loading-div">Loading</div>
       ) : (
           <>
-            {page?._embedded?.beers.map(beer => <BeerCard beer={beer} />)}
-            <PaginationBar pageSummary={page?.page} changeCurrentPage={(cp: number) => changeCurrentPage(cp)} />
+            <Row data-testid="beer-row-div">
+              {page?._embedded?.beers.map(beer => {
+                return <BeerCard key={beer.id} beer={beer} />
+              })}
+            </Row>
+            <Row data-testid="pagination-row-div">
+              <PaginationBar pageSummary={page?.page} changeCurrentPage={(cp: number) => changeCurrentPage(cp)} />
+            </Row>
           </>
-        )}
+        )
+      }
 
     </PageContainer>)
 }

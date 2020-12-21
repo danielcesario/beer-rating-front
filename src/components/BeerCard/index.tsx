@@ -5,7 +5,7 @@ import { BeerCardContainer } from './styles';
 
 export const BeerCard: React.FC<{beer: Beer}> = ({children, beer}) => {
   return (
-  <BeerCardContainer>
+  <BeerCardContainer data-testid="beer-card">
     <div className="header">
       <h1 className="title">{beer.name}</h1>
     </div>

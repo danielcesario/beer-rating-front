@@ -5,7 +5,8 @@ export const BeerCardContainer = styled.div`
   
   font-family: 'Roboto', sans-serif;
   max-width: 655px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+  margin-right: 8px;
   border: 1px solid lightGray;
   display: flex;
   flex-direction: column;
